@@ -1,3 +1,11 @@
+# BROKEN
+# DONT USE
+# pre-computing the sets without all possible sums, event
+# sums of like numbers, doesn't allow you to create the whole
+# tree of posibilites
+# even culling out duplicate numbers incrementally
+# leads to many missed sets
+
 from __future__ import print_function
 
 import sys
@@ -12,16 +20,16 @@ def getSteps(n):
 
     possibleStepSizes = range(1, n)
     stepPairSums = defaultdict(dict)
-    index = 0
+    # index = 0
 
     for number in possibleStepSizes:
         toSum = possibleStepSizes[:]
-        toSum.pop(index)
+        # toSum.pop(index)
         for x in toSum:
             pair = [x, number]
             pair.sort()
             stepPairSums[x + number][pair[0]] = pair[1]
-        index += 1
+        # index += 1
 
     # now we have a dictionary where the keys are all the sum values of all
     # pairs of steps. ie: for 5 we have:
@@ -47,7 +55,7 @@ def getSteps(n):
         key = str(steps)
         if not stringSolutions.get(key):
             stringSolutions[key] = True
-            stepValues.append(steps)
+        stepValues.append(steps)
 
     def returnSingleCollapse(steps):
         steps = steps[:]
@@ -85,15 +93,15 @@ def getSteps(n):
                 addSteps(steps)
 
     for x, y in list(nGroup.iteritems()):
-        # print(x, y)
+        print(x, y)
         thisOne = [x, y]
         addSteps(thisOne)
 
-    print(len(stepValues))
+    print(stepValues)
 
     print(datetime.now() - startTime)
 
-getSteps(15)
+getSteps(12)
 
 
 # getNumber
@@ -120,3 +128,18 @@ getSteps(15)
 # 1,2,4
 # 1,2,1,3
 # 3,1,3
+
+
+# [1, 11],
+# [1, 2, 9],
+# [1, 2, 3, 6],
+# [1, 2, 4, 5],
+# [1, 3, 8],
+# [1, 4, 7],
+# [1, 5, 6],
+# [2, 10],
+# [2, 3, 7],
+# [2, 4, 6],
+# [3, 9],
+# [4, 8],
+# [5, 7],
